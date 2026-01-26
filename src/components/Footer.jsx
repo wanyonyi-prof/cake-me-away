@@ -1,14 +1,5 @@
 import React from 'react';
-import { 
-  FiMapPin, 
-  FiPhone, 
-  FiClock, 
-  FiMail, 
-  FiFacebook,
-  FiInstagram,
-  FiTwitter
-} from 'react-icons/fi';
-import { FaWhatsapp } from 'react-icons/fa';
+import restaurantLogo from '../assets/images/logo.jpg'; // SAME FILENAME
 import './Footer.css';
 
 const Footer = () => {
@@ -22,7 +13,11 @@ const Footer = () => {
           <div className="footer-column">
             <div className="footer-brand">
               <div className="footer-logo">
-                <span className="icon-xl icon-white">🍰</span>
+                <img 
+                  src={restaurantLogo} 
+                  alt="Cake Me Away Restaurant Logo" 
+                  className="footer-logo-img"
+                />
               </div>
               <h3 className="footer-title">Cake Me Away</h3>
               <p className="footer-tagline">Fresh meals, fresh life</p>
@@ -38,7 +33,7 @@ const Footer = () => {
             <h4 className="footer-heading">Contact Info</h4>
             <div className="contact-list">
               <div className="contact-item">
-                <FiMapPin className="contact-icon" />
+                <span className="contact-emoji">📍</span>
                 <div>
                   <p className="contact-label">Location</p>
                   <p className="contact-value">Kwale, Kenya</p>
@@ -47,7 +42,7 @@ const Footer = () => {
               </div>
               
               <div className="contact-item">
-                <FiPhone className="contact-icon" />
+                <span className="contact-emoji">📱</span>
                 <div>
                   <p className="contact-label">Phone Numbers</p>
                   <a href="tel:+254728491309" className="contact-value link">
@@ -60,7 +55,7 @@ const Footer = () => {
               </div>
               
               <div className="contact-item">
-                <FiClock className="contact-icon" />
+                <span className="contact-emoji">🕒</span>
                 <div>
                   <p className="contact-label">Operating Hours</p>
                   <p className="contact-value">Daily: 6:00 AM - 8:00 PM</p>
@@ -73,12 +68,12 @@ const Footer = () => {
           <div className="footer-column">
             <h4 className="footer-heading">Quick Links</h4>
             <ul className="footer-links">
-              <li><a href="/" className="footer-link">Home</a></li>
-              <li><a href="/menu" className="footer-link">Menu</a></li>
-              <li><a href="/about" className="footer-link">About Us</a></li>
-              <li><a href="/contact" className="footer-link">Contact</a></li>
-              <li><a href="#reservation" className="footer-link">Reservations</a></li>
-              <li><a href="#catering" className="footer-link">Catering</a></li>
+              <li><a href="/" className="footer-link">🏠 Home</a></li>
+              <li><a href="/menu" className="footer-link">📋 Menu</a></li>
+              <li><a href="/about" className="footer-link">⭐ About Us</a></li>
+              <li><a href="/contact" className="footer-link">📞 Contact</a></li>
+              <li><a href="#reservation" className="footer-link">📅 Reservations</a></li>
+              <li><a href="#catering" className="footer-link">🎉 Catering</a></li>
             </ul>
           </div>
 
@@ -87,13 +82,13 @@ const Footer = () => {
             <h4 className="footer-heading">Connect With Us</h4>
             <div className="social-links">
               <a href="#" className="social-link" aria-label="Facebook">
-                <FiFacebook />
+                📘
               </a>
               <a href="#" className="social-link" aria-label="Instagram">
-                <FiInstagram />
+                📷
               </a>
               <a href="#" className="social-link" aria-label="Twitter">
-                <FiTwitter />
+                🐦
               </a>
               <a 
                 href="https://wa.me/254743184519" 
@@ -102,13 +97,13 @@ const Footer = () => {
                 className="social-link"
                 aria-label="WhatsApp"
               >
-                <FaWhatsapp />
+                💬
               </a>
             </div>
             
             <div className="footer-note note">
               <p>
-                <span className="icon-sm">⚠️</span>
+                <span className="warning-emoji">⚠️</span>
                 All meals are prepared upon order for maximum freshness
               </p>
             </div>

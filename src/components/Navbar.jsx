@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { FiHome, FiMenu, FiX, FiPhone, FiInfo, FiMail } from 'react-icons/fi';
 import { FaUtensils, FaWhatsapp } from 'react-icons/fa';
+import restaurantLogo from '../assets/images/logo.jpg'; // CHANGE THIS FILENAME
 import './Navbar.css';
 
 const Navbar = () => {
@@ -20,7 +22,11 @@ const Navbar = () => {
           {/* Logo */}
           <div className="logo">
             <div className="logo-icon">
-              <span className="icon-lg icon-primary">🍰</span>
+              <img 
+                src={restaurantLogo} 
+                alt="Cake Me Away Restaurant Logo" 
+                className="logo-img"
+              />
             </div>
             <div className="logo-text">
               <h1 className="logo-title">Cake Me Away</h1>
@@ -31,15 +37,15 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="nav-desktop">
             {navItems.map((item) => (
-              <a 
+              <Link 
                 key={item.name} 
-                href={item.path} 
+                to={item.path}
                 className="nav-link"
                 onClick={() => window.scrollTo(0, 0)}
               >
                 <span className="nav-icon">{item.icon}</span>
                 <span className="nav-text">{item.name}</span>
-              </a>
+              </Link>
             ))}
             <div className="nav-actions">
               <a 
@@ -74,9 +80,9 @@ const Navbar = () => {
         {/* Mobile Navigation */}
         <div className={`nav-mobile ${isOpen ? 'open' : ''}`}>
           {navItems.map((item) => (
-            <a
+            <Link
               key={item.name}
-              href={item.path}
+              to={item.path}
               className="nav-link mobile"
               onClick={() => {
                 setIsOpen(false);
@@ -85,7 +91,7 @@ const Navbar = () => {
             >
               <span className="nav-icon">{item.icon}</span>
               <span className="nav-text">{item.name}</span>
-            </a>
+            </Link>
           ))}
           <div className="mobile-actions">
             <a 

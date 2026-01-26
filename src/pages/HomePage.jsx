@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   FiCoffee, 
   FiDroplet, 
@@ -7,7 +7,9 @@ import {
   FiMapPin,
   FiPhone,
   FiStar,
-  FiChevronsRight
+  FiChevronsRight,
+  FiChevronLeft,
+  FiChevronRight as FiChevronRightIcon
 } from 'react-icons/fi';
 import { 
   FaUtensils, 
@@ -26,6 +28,13 @@ import {
   FaMapMarkerAlt
 } from 'react-icons/fa';
 import './HomePage.css';
+
+// IMPORT YOUR CAROUSEL IMAGES - Add your actual image filenames here
+import foodImage1 from '../assets/images/food 1.jpg'; // Replace with your actual filenames
+import foodImage2 from '../assets/images/food 2.jpg';
+import foodImage3 from '../assets/images/food 3.jpg';
+import foodImage4 from '../assets/images/food 4.jpg';
+import foodImage5 from '../assets/images/food 5.jpg';
 
 const HomePage = () => {
   const categories = [
@@ -64,6 +73,64 @@ const HomePage = () => {
     { icon: <FiStar />, text: 'Made to Order' },
     { icon: <FiClock />, text: '6 AM - 8 PM Daily' }
   ];
+
+  // CAROUSEL STATE AND IMAGES
+  const [currentSlide, setCurrentSlide] = useState(0);
+  
+  // Carousel images array - Add your actual image imports here
+  const carouselImages = [
+    {
+      id: 1,
+      image: foodImage1, // Replace with your imported image
+      title: 'Fresh Breakfast',
+      description: 'Start your day with our delicious morning specials'
+    },
+    {
+      id: 2,
+      image: foodImage2, // Replace with your imported image
+      title: 'Main Course Delights',
+      description: 'Hearty meals prepared with love and care'
+    },
+    {
+      id: 3,
+      image: foodImage3, // Replace with your imported image
+      title: 'Sweet Desserts',
+      description: 'Perfect endings to your dining experience'
+    },
+    {
+      id: 4,
+      image: foodImage4, // Replace with your imported image
+      title: 'Fresh Ingredients',
+      description: 'Quality ingredients for quality meals'
+    },
+    {
+      id: 5,
+      image: foodImage5, // Replace with your imported image
+      title: 'Warm Ambiance',
+      description: 'Enjoy our cozy restaurant atmosphere'
+    }
+  ];
+
+  // Auto slide every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, [carouselImages.length]);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
+  };
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+  };
 
   return (
     <div className="home-page">
@@ -124,6 +191,63 @@ const HomePage = () => {
                 <FaIceCream className="showcase-icon" />
                 <span>Desserts</span>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* NEW: Carousel Section */}
+      <section className="carousel-section section">
+        <div className="container">
+          <h2 className="section-title">A Taste of Our Kitchen</h2>
+          <p className="section-subtitle">
+            Browse through some of our delicious offerings and fresh preparations
+          </p>
+          
+          <div className="carousel-container">
+            <div className="carousel-wrapper">
+              {carouselImages.map((slide, index) => (
+                <div
+                  key={slide.id}
+                  className={`carousel-slide ${index === currentSlide ? 'active' : ''}`}
+                  style={{
+                    transform: `translateX(-${currentSlide * 100}%)`
+                  }}
+                >
+                  <div className="slide-image-container">
+                    <img 
+                      src={slide.image} 
+                      alt={slide.title}
+                      className="slide-image"
+                    />
+                    <div className="slide-overlay"></div>
+                  </div>
+                  <div className="slide-content">
+                    <h3 className="slide-title">{slide.title}</h3>
+                    <p className="slide-description">{slide.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            {/* Carousel Controls */}
+            <button className="carousel-btn prev" onClick={prevSlide}>
+              <FiChevronLeft className="carousel-icon" />
+            </button>
+            <button className="carousel-btn next" onClick={nextSlide}>
+              <FiChevronRightIcon className="carousel-icon" />
+            </button>
+            
+            {/* Carousel Indicators */}
+            <div className="carousel-indicators">
+              {carouselImages.map((_, index) => (
+                <button
+                  key={index}
+                  className={`carousel-indicator ${index === currentSlide ? 'active' : ''}`}
+                  onClick={() => goToSlide(index)}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
             </div>
           </div>
         </div>
