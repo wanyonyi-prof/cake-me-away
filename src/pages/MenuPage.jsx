@@ -1,10 +1,30 @@
 import React from 'react';
 import './MenuPage.css';
 
+// Import your menu category images
+import breakfastImage from '../assets/images/menu/breakfast.jpg';
+import beveragesImage from '../assets/images/menu/beverages.jpg';
+import snacksImage from '../assets/images/menu/snacks.jpg';
+import pastaImage from '../assets/images/menu/pasta.jpg';
+import fishImage from '../assets/images/menu/fish.jpg';
+import beefImage from '../assets/images/menu/beef.jpg';
+import chickenImage from '../assets/images/menu/chicken.jpg';
+import dessertsImage from '../assets/images/menu/desserts.jpg';
+
+// Import side dish images
+import riceImage from '../assets/images/menu/sides/rice.jpg';
+import chapatiImage from '../assets/images/menu/sides/chapati.jpg';
+import chipsImage from '../assets/images/menu/sides/chips.jpg';
+import ugaliImage from '../assets/images/menu/sides/ugali.jpg';
+import pilauImage from '../assets/images/menu/sides/pilau.jpg';
+import beansImage from '../assets/images/menu/sides/beans.jpg';
+import potatoesImage from '../assets/images/menu/sides/potatoes.jpg';
+
 const MenuPage = () => {
   const menuData = [
     {
-      emoji: '🥞',
+      id: 1,
+      image: breakfastImage,
       title: "Breakfast",
       description: "Start your day right with our hearty breakfast options",
       items: [
@@ -17,7 +37,8 @@ const MenuPage = () => {
       ]
     },
     {
-      emoji: '☕',
+      id: 2,
+      image: beveragesImage,
       title: "Beverages",
       description: "Hot and cold drinks to complement your meal",
       items: [
@@ -28,7 +49,8 @@ const MenuPage = () => {
       ]
     },
     {
-      emoji: '🍴',
+      id: 3,
+      image: snacksImage,
       title: "Snacks",
       description: "Quick bites and light meals",
       items: [
@@ -42,7 +64,8 @@ const MenuPage = () => {
       ]
     },
     {
-      emoji: '🍝',
+      id: 4,
+      image: pastaImage,
       title: "Pasta Menu",
       description: "Italian-inspired pasta dishes made fresh",
       items: [
@@ -52,7 +75,8 @@ const MenuPage = () => {
       ]
     },
     {
-      emoji: '🐟',
+      id: 5,
+      image: fishImage,
       title: "Fish Dishes",
       description: "Fresh fish prepared in various styles",
       items: [
@@ -64,7 +88,8 @@ const MenuPage = () => {
       ]
     },
     {
-      emoji: '🥩',
+      id: 6,
+      image: beefImage,
       title: "Beef Specialties",
       description: "Hearty beef dishes",
       items: [
@@ -76,7 +101,8 @@ const MenuPage = () => {
       ]
     },
     {
-      emoji: '🍗',
+      id: 7,
+      image: chickenImage,
       title: "Chicken Dishes",
       description: "Chicken prepared multiple ways",
       items: [
@@ -88,7 +114,8 @@ const MenuPage = () => {
       ]
     },
     {
-      emoji: '🍰',
+      id: 8,
+      image: dessertsImage,
       title: "Desserts",
       description: "Sweet treats to end your meal",
       items: [
@@ -101,10 +128,22 @@ const MenuPage = () => {
     }
   ];
 
-  const sides = [
-    "Rice", "Vegetable Rice", "Coconut Rice", "Chapati", "Chips", 
-    "Baked Potatoes", "Mashed Potatoes", "Ugali", "Pilau", "Creamed Pinch", 
-    "Coconut Beans", "Beans", "Pojo", "Pojo ya Nazi", "Chips Masala"
+  const sidesData = [
+    { name: "Rice", image: riceImage },
+    { name: "Vegetable Rice", image: riceImage },
+    { name: "Coconut Rice", image: riceImage },
+    { name: "Chapati", image: chapatiImage },
+    { name: "Chips", image: chipsImage },
+    { name: "Baked Potatoes", image: potatoesImage },
+    { name: "Mashed Potatoes", image: potatoesImage },
+    { name: "Ugali", image: ugaliImage },
+    { name: "Pilau", image: pilauImage },
+    { name: "Creamed Pinch", image: riceImage },
+    { name: "Coconut Beans", image: beansImage },
+    { name: "Beans", image: beansImage },
+    { name: "Pojo", image: beansImage },
+    { name: "Pojo ya Nazi", image: beansImage },
+    { name: "Chips Masala", image: chipsImage }
   ];
 
   return (
@@ -119,7 +158,7 @@ const MenuPage = () => {
               Every dish is prepared with care and quality ingredients.
             </p>
             <div className="fresh-promise">
-              <span className="promise-emoji">🍃</span>
+              <span className="promise-icon">🍃</span>
               <p>All meals are prepared upon order for maximum freshness</p>
             </div>
           </div>
@@ -130,10 +169,20 @@ const MenuPage = () => {
       <section className="menu-categories section">
         <div className="container">
           <div className="menu-grid">
-            {menuData.map((category, index) => (
-              <div key={index} className="menu-category-card card">
+            {menuData.map((category) => (
+              <div key={category.id} className="menu-category-card card" id={category.id}>
                 <div className="category-header">
-                  <div className="category-emoji">{category.emoji}</div>
+                  <div className="category-image-container">
+                    <img 
+                      src={category.image} 
+                      alt={category.title}
+                      className="category-image"
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                        e.target.parentElement.innerHTML = `<div class="category-fallback">${category.title.charAt(0)}</div>`;
+                      }}
+                    />
+                  </div>
                   <h3>{category.title}</h3>
                 </div>
                 
@@ -159,7 +208,7 @@ const MenuPage = () => {
                   {category.title === "Pasta Menu" && (
                     <div className="pasta-addons">
                       <p>
-                        <span className="addon-emoji">✨</span>
+                        <span className="addon-icon">✨</span>
                         Optional add-ons: Grilled Chicken, Minced Beef, Fish Fillet, 
                         Vegetables, Extra Cheese, Additional Sauce
                       </p>
@@ -177,17 +226,27 @@ const MenuPage = () => {
         <div className="container">
           <h2 className="sides-title">Side Dishes & Accompaniments</h2>
           <div className="sides-grid">
-            {sides.map((side, index) => (
+            {sidesData.map((side, index) => (
               <div key={index} className="side-item">
-                <span className="side-emoji">🥄</span>
-                <span className="side-name">{side}</span>
+                <div className="side-image-container">
+                  <img 
+                    src={side.image} 
+                    alt={side.name}
+                    className="side-image"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.parentElement.innerHTML = `<div class="side-fallback">${side.name.charAt(0)}</div>`;
+                    }}
+                  />
+                </div>
+                <span className="side-name">{side.name}</span>
               </div>
             ))}
           </div>
           
           <div className="menu-note note">
             <p>
-              <span className="note-emoji">💡</span>
+              <span className="note-icon">💡</span>
               <strong>Note:</strong> Fish prices depend on size. All meals are prepared fresh upon order.
             </p>
           </div>

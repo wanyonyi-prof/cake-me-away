@@ -27,14 +27,21 @@ import {
   FaPhoneAlt,
   FaMapMarkerAlt
 } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import './HomePage.css';
 
 // IMPORT YOUR CAROUSEL IMAGES - Add your actual image filenames here
-import foodImage1 from '../assets/images/food 1.jpg'; // Replace with your actual filenames
+import foodImage1 from '../assets/images/food 1.jpg';
 import foodImage2 from '../assets/images/food 2.jpg';
 import foodImage3 from '../assets/images/food 3.jpg';
 import foodImage4 from '../assets/images/food 4.jpg';
 import foodImage5 from '../assets/images/food 5.jpg';
+
+// IMPORT YOUR HERO BACKGROUND IMAGES - Add your restaurant/cafe images here
+import heroBg1 from '../assets/images/hero-bg-1.jpg'; // Your first background image
+import heroBg2 from '../assets/images/hero-bg-2.jpg'; // Your second background image
+import heroBg3 from '../assets/images/hero-bg-3.jpg'; // Your third background image
+import heroBg4 from '../assets/images/hero-bg-4.jpg'; // Your fourth background image
 
 const HomePage = () => {
   const categories = [
@@ -74,50 +81,86 @@ const HomePage = () => {
     { icon: <FiClock />, text: '6 AM - 8 PM Daily' }
   ];
 
-  // CAROUSEL STATE AND IMAGES
+  // HERO BACKGROUND CAROUSEL STATE
+  const [currentBgSlide, setCurrentBgSlide] = useState(0);
+  
+  // Hero background images array - Add your imported images here
+  const heroBackgroundImages = [
+    {
+      id: 1,
+      image: heroBg1, // Your first restaurant image
+      alt: 'Cake Me Away Restaurant Interior'
+    },
+    {
+      id: 2,
+      image: heroBg2, // Your second restaurant image
+      alt: 'different meals offered'
+    },
+    {
+      id: 3,
+      image: heroBg3, // Your third restaurant image
+      alt: 'Cake Me Away Food Presentation'
+    },
+    {
+      id: 4,
+      image: heroBg4, // Your fourth restaurant image
+      alt: 'Cake Me Away Atmosphere'
+    }
+  ];
+
+  // Auto slide hero background every 6 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentBgSlide((prev) => (prev + 1) % heroBackgroundImages.length);
+    }, 6000);
+    
+    return () => clearInterval(interval);
+  }, [heroBackgroundImages.length]);
+
+  // MAIN CAROUSEL STATE AND IMAGES
   const [currentSlide, setCurrentSlide] = useState(0);
   
   // Carousel images array - Add your actual image imports here
   const carouselImages = [
     {
       id: 1,
-      image: foodImage1, // Replace with your imported image
+      image: foodImage1,
       title: 'Fresh Breakfast',
       description: 'Start your day with our delicious morning specials'
     },
     {
       id: 2,
-      image: foodImage2, // Replace with your imported image
+      image: foodImage2,
       title: 'Main Course Delights',
       description: 'Hearty meals prepared with love and care'
     },
     {
       id: 3,
-      image: foodImage3, // Replace with your imported image
+      image: foodImage3,
       title: 'Sweet Desserts',
       description: 'Perfect endings to your dining experience'
     },
     {
       id: 4,
-      image: foodImage4, // Replace with your imported image
+      image: foodImage4,
       title: 'Fresh Ingredients',
       description: 'Quality ingredients for quality meals'
     },
     {
       id: 5,
-      image: foodImage5, // Replace with your imported image
+      image: foodImage5,
       title: 'Warm Ambiance',
       description: 'Enjoy our cozy restaurant atmosphere'
     }
   ];
 
-  // Auto slide every 5 seconds
+  // Auto slide main carousel every 5 seconds
   useEffect(() => {
-    const interval = setInterval(() => {
+    const carouselInterval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
     }, 5000);
     
-    return () => clearInterval(interval);
+    return () => clearInterval(carouselInterval);
   }, [carouselImages.length]);
 
   const nextSlide = () => {
@@ -134,8 +177,39 @@ const HomePage = () => {
 
   return (
     <div className="home-page">
-      {/* Hero Section */}
+      {/* Hero Section with Background Image Carousel */}
       <section className="hero-section">
+        {/* Background Image Carousel */}
+        <div className="hero-bg-carousel">
+          {heroBackgroundImages.map((bgImage, index) => (
+            <div
+              key={bgImage.id}
+              className={`hero-bg-slide ${index === currentBgSlide ? 'active' : ''}`}
+              style={{
+                backgroundImage: `url(${bgImage.image})`,
+                opacity: index === currentBgSlide ? 1 : 0,
+                transition: 'opacity 1.5s ease-in-out'
+              }}
+              aria-hidden={index !== currentBgSlide}
+            >
+              {/* Background Overlay for better text readability */}
+              <div className="hero-bg-overlay"></div>
+            </div>
+          ))}
+          
+          {/* Background Carousel Indicators */}
+          <div className="hero-bg-indicators">
+            {heroBackgroundImages.map((_, index) => (
+              <button
+                key={index}
+                className={`hero-bg-indicator ${index === currentBgSlide ? 'active' : ''}`}
+                onClick={() => setCurrentBgSlide(index)}
+                aria-label={`Go to background image ${index + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+        
         <div className="container">
           <div className="hero-content animate-fade">
             <div className="badge">
@@ -165,11 +239,11 @@ const HomePage = () => {
             </div>
             
             <div className="hero-actions">
-              <a href="/menu" className="btn btn-primary">
+              <Link to="/menu" className="btn btn-primary">
                 <FaUtensils className="icon-sm" />
                 <span>Explore Our Menu</span>
                 <FiChevronRight className="icon-sm" />
-              </a>
+              </Link>
               <a href="tel:+254743184519" className="btn btn-secondary">
                 <FaPhoneAlt className="icon-sm" />
                 <span>Call to Order</span>
@@ -179,18 +253,18 @@ const HomePage = () => {
           
           <div className="hero-image animate-slide-right">
             <div className="food-showcase">
-              <div className="showcase-item breakfast">
+              <Link to="/menu#breakfast" className="showcase-item breakfast">
                 <FaMugHot className="showcase-icon" />
                 <span>Breakfast</span>
-              </div>
-              <div className="showcase-item main">
+              </Link>
+              <Link to="/menu#main-dishes" className="showcase-item main">
                 <FaUtensils className="showcase-icon" />
                 <span>Main Dishes</span>
-              </div>
-              <div className="showcase-item dessert">
+              </Link>
+              <Link to="/menu#desserts" className="showcase-item dessert">
                 <FaIceCream className="showcase-icon" />
                 <span>Desserts</span>
-              </div>
+              </Link>
             </div>
           </div>
         </div>
@@ -286,10 +360,10 @@ const HomePage = () => {
                   ))}
                 </ul>
                 
-                <a href="/menu" className="category-link">
+                <Link to="/menu" className="category-link">
                   <span>View All</span>
                   <FiChevronRight />
-                </a>
+                </Link>
               </div>
             ))}
           </div>
@@ -313,10 +387,10 @@ const HomePage = () => {
                 <span>Call Now: +254 743 184 519</span>
               </a>
               
-              <a href="/contact" className="btn btn-outline">
+              <Link to="/contact" className="btn btn-outline">
                 <FaMapMarkerAlt className="icon-md" />
                 <span>Get Directions</span>
-              </a>
+              </Link>
             </div>
             
             <div className="order-note">

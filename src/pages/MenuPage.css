@@ -434,3 +434,106 @@
     padding: 20px 15px;
   }
 }
+/* Category Image Styles */
+.category-image-container {
+  width: 70px;
+  height: 70px;
+  border-radius: 18px;
+  overflow: hidden;
+  backdrop-filter: blur(5px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.category-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.category-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(135deg, var(--primary-red), var(--primary-red-dark));
+}
+
+/* Side Image Styles */
+.side-image-container {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 12px;
+  border: 3px solid var(--primary-red-light);
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.side-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.side-item:hover .side-image {
+  transform: scale(1.1);
+}
+
+.side-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-red);
+  background: var(--light-gray);
+}
+
+/* Update existing styles */
+.category-header {
+  background: linear-gradient(135deg, var(--primary-red), var(--primary-red-dark));
+  color: white;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.side-item {
+  background: linear-gradient(135deg, var(--light-gray), white);
+  padding: 30px 20px;
+  border-radius: 16px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Responsive updates */
+@media (max-width: 768px) {
+  .category-image-container {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .side-image-container {
+    width: 50px;
+    height: 50px;
+  }
+}

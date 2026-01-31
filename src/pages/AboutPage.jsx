@@ -4,22 +4,22 @@ import './AboutPage.css';
 const AboutPage = () => {
   const values = [
     {
-      emoji: '🌿',
+      image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
       title: "Fresh Ingredients",
       description: "We source the freshest local ingredients for every dish"
     },
     {
-      emoji: '👨‍🍳',
+      image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
       title: "Made to Order",
       description: "Every meal is prepared fresh when you order it"
     },
     {
-      emoji: '❤️',
+      image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
       title: "Passion for Food",
       description: "We cook with love and attention to detail"
     },
     {
-      emoji: '🤝',
+      image: 'https://images.unsplash.com/photo-1556911073-38141963c9e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
       title: "Community Focused",
       description: "Serving the Kwale community with pride since inception"
     }
@@ -28,25 +28,25 @@ const AboutPage = () => {
   const processSteps = [
     {
       step: "1",
-      emoji: "📝",
+      image: "https://images.unsplash.com/photo-1579113800032-c38bd7635818?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
       title: "You Order",
       description: "You select your meal from our fresh menu"
     },
     {
       step: "2",
-      emoji: "👨‍🍳",
+      image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
       title: "We Prepare",
       description: "Our chefs begin cooking immediately with fresh ingredients"
     },
     {
       step: "3",
-      emoji: "🍽️",
+      image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
       title: "We Serve",
       description: "Your hot, fresh meal is served at perfect temperature"
     },
     {
       step: "4",
-      emoji: "😊",
+      image: "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
       title: "You Enjoy",
       description: "Experience the difference of truly fresh dining"
     }
@@ -97,9 +97,15 @@ const AboutPage = () => {
             </div>
             
             <div className="story-image">
-              <div className="image-placeholder">
-                <span className="image-emoji">🏪</span>
-                <span className="image-text">Our Restaurant in Kwale</span>
+              <div 
+                className="restaurant-image"
+                style={{
+                  backgroundImage: 'url(https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80)'
+                }}
+              >
+                <div className="image-overlay">
+                  <span className="image-text">Our Restaurant in Kwale</span>
+                </div>
               </div>
             </div>
           </div>
@@ -113,7 +119,17 @@ const AboutPage = () => {
           <div className="values-grid">
             {values.map((value, index) => (
               <div key={index} className="value-card card">
-                <div className="value-emoji">{value.emoji}</div>
+                <div className="value-image-container">
+                  <img 
+                    src={value.image} 
+                    alt={value.title}
+                    className="value-image"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.parentElement.innerHTML = `<div class="value-fallback">${value.title.charAt(0)}</div>`;
+                    }}
+                  />
+                </div>
                 <h3 className="value-title">{value.title}</h3>
                 <p className="value-description">{value.description}</p>
               </div>
@@ -134,11 +150,22 @@ const AboutPage = () => {
                 </div>
                 <div className="step-content">
                   <div className="step-card card">
-                    <div className="step-header">
-                      <span className="step-emoji">{step.emoji}</span>
-                      <h3 className="step-title">{step.title}</h3>
+                    <div className="step-image-container">
+                      <img 
+                        src={step.image} 
+                        alt={step.title}
+                        className="step-image"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.parentElement.innerHTML = `<div class="step-fallback">${step.step}</div>`;
+                        }}
+                      />
+                      <div className="step-overlay"></div>
                     </div>
-                    <p className="step-description">{step.description}</p>
+                    <div className="step-info">
+                      <h3 className="step-title">{step.title}</h3>
+                      <p className="step-description">{step.description}</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -152,7 +179,14 @@ const AboutPage = () => {
         <div className="container">
           <div className="team-message card card-highlight">
             <div className="team-header">
-              <span className="team-emoji">👨‍🍳👩‍🍳</span>
+              <div className="team-image-container">
+                <img 
+                  src="https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                  alt="Cake Me Away Team"
+                  className="team-image"
+                />
+                <div className="team-image-overlay"></div>
+              </div>
               <h3 className="team-title">A Message From Our Team</h3>
             </div>
             <p className="team-text">
