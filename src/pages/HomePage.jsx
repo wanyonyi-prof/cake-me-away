@@ -30,44 +30,62 @@ import {
 import { Link } from 'react-router-dom';
 import './HomePage.css';
 
-// IMPORT YOUR CAROUSEL IMAGES - Add your actual image filenames here
+// IMPORT YOUR CAROUSEL IMAGES
 import foodImage1 from '../assets/images/food 1.jpg';
 import foodImage2 from '../assets/images/food 2.jpg';
 import foodImage3 from '../assets/images/food 3.jpg';
 import foodImage4 from '../assets/images/food 4.jpg';
 import foodImage5 from '../assets/images/food 5.jpg';
 
-// IMPORT YOUR HERO BACKGROUND IMAGES - Add your restaurant/cafe images here
-import heroBg1 from '../assets/images/hero-bg-1.jpg'; // Your first background image
-import heroBg2 from '../assets/images/hero-bg-2.jpg'; // Your second background image
-import heroBg3 from '../assets/images/hero-bg-3.jpg'; // Your third background image
-import heroBg4 from '../assets/images/hero-bg-4.jpg'; // Your fourth background image
+// IMPORT YOUR HERO BACKGROUND IMAGES
+import heroBg1 from '../assets/images/hero-bg-1.jpg';
+import heroBg3 from '../assets/images/hero-bg-3.jpg';
+import heroBg4 from '../assets/images/hero-bg-4.jpg';
 
 const HomePage = () => {
+  // Stacked background images for hero section
+  const heroBackgroundImages = [
+    heroBg1,
+    heroBg3,
+    heroBg4
+  ];
+
+  // Category images from Unsplash - matching the content
+  const categoryImages = {
+    breakfast: 'https://images.unsplash.com/photo-1551782450-17144efb9c50?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    'main-dishes': 'https://images.unsplash.com/photo-1563379926898-05f4575a45d8?ixlib=rb-4.0.3&auto=format&fit=crop&w-800&q=80',
+    desserts: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    snacks: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+  };
+
   const categories = [
     {
-      icon: <FaMugHot />,
+      id: 'breakfast',
+      image: categoryImages.breakfast,
       title: 'Breakfast',
       description: 'Start your day with our hearty breakfast selection',
       items: ['English Breakfast', 'Tuber & Cream Vegetables', 'Fresh Juices', 'Tea & Coffee'],
       color: 'var(--primary-red-light)'
     },
     {
-      icon: <FaUtensils />,
+      id: 'main-dishes',
+      image: categoryImages['main-dishes'],
       title: 'Main Dishes',
       description: 'Freshly prepared main courses',
       items: ['Beef Specialties', 'Fish Dishes', 'Chicken Varieties', 'Pasta Menu'],
       color: '#f0f9ff'
     },
     {
-      icon: <FaIceCream />,
+      id: 'desserts',
+      image: categoryImages.desserts,
       title: 'Desserts',
       description: 'Sweet endings to your meal',
       items: ['Cakes & Slices', 'Ice Cream', 'Milkshakes', 'Cupcakes'],
       color: '#fef3c7'
     },
     {
-      icon: <FaCookieBite />,
+      id: 'snacks',
+      image: categoryImages.snacks,
       title: 'Snacks',
       description: 'Quick bites and appetizers',
       items: ['Samosas', 'Pancakes', 'Omelettes', 'Toasted Bread'],
@@ -81,46 +99,9 @@ const HomePage = () => {
     { icon: <FiClock />, text: '6 AM - 8 PM Daily' }
   ];
 
-  // HERO BACKGROUND CAROUSEL STATE
-  const [currentBgSlide, setCurrentBgSlide] = useState(0);
-  
-  // Hero background images array - Add your imported images here
-  const heroBackgroundImages = [
-    {
-      id: 1,
-      image: heroBg1, // Your first restaurant image
-      alt: 'Cake Me Away Restaurant Interior'
-    },
-    {
-      id: 2,
-      image: heroBg2, // Your second restaurant image
-      alt: 'different meals offered'
-    },
-    {
-      id: 3,
-      image: heroBg3, // Your third restaurant image
-      alt: 'Cake Me Away Food Presentation'
-    },
-    {
-      id: 4,
-      image: heroBg4, // Your fourth restaurant image
-      alt: 'Cake Me Away Atmosphere'
-    }
-  ];
-
-  // Auto slide hero background every 6 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentBgSlide((prev) => (prev + 1) % heroBackgroundImages.length);
-    }, 6000);
-    
-    return () => clearInterval(interval);
-  }, [heroBackgroundImages.length]);
-
   // MAIN CAROUSEL STATE AND IMAGES
   const [currentSlide, setCurrentSlide] = useState(0);
   
-  // Carousel images array - Add your actual image imports here
   const carouselImages = [
     {
       id: 1,
@@ -177,41 +158,27 @@ const HomePage = () => {
 
   return (
     <div className="home-page">
-      {/* Hero Section with Background Image Carousel */}
+      {/* Hero Section with STACKED Background Images */}
       <section className="hero-section">
-        {/* Background Image Carousel */}
-        <div className="hero-bg-carousel">
-          {heroBackgroundImages.map((bgImage, index) => (
+        {/* Stacked Background Images Container */}
+        <div className="hero-stacked-images">
+          {heroBackgroundImages.map((image, index) => (
             <div
-              key={bgImage.id}
-              className={`hero-bg-slide ${index === currentBgSlide ? 'active' : ''}`}
+              key={index}
+              className="stacked-image-layer"
               style={{
-                backgroundImage: `url(${bgImage.image})`,
-                opacity: index === currentBgSlide ? 1 : 0,
-                transition: 'opacity 1.5s ease-in-out'
+                backgroundImage: `url(${image})`,
+                zIndex: heroBackgroundImages.length - index, // First image on top
+                opacity: 0.2 + (index * 0.1) // Each layer gets slightly more opaque
               }}
-              aria-hidden={index !== currentBgSlide}
-            >
-              {/* Background Overlay for better text readability */}
-              <div className="hero-bg-overlay"></div>
-            </div>
+              aria-hidden="true"
+            />
           ))}
-          
-          {/* Background Carousel Indicators */}
-          <div className="hero-bg-indicators">
-            {heroBackgroundImages.map((_, index) => (
-              <button
-                key={index}
-                className={`hero-bg-indicator ${index === currentBgSlide ? 'active' : ''}`}
-                onClick={() => setCurrentBgSlide(index)}
-                aria-label={`Go to background image ${index + 1}`}
-              />
-            ))}
-          </div>
+          <div className="stacked-overlay"></div>
         </div>
         
         <div className="container">
-          <div className="hero-content animate-fade">
+          <div className="hero-content">
             <div className="badge">
               <FaSeedling className="icon-sm" />
               <span>Fresh Daily</span>
@@ -251,18 +218,41 @@ const HomePage = () => {
             </div>
           </div>
           
-          <div className="hero-image animate-slide-right">
+          <div className="hero-image">
             <div className="food-showcase">
               <Link to="/menu#breakfast" className="showcase-item breakfast">
-                <FaMugHot className="showcase-icon" />
+                <div className="showcase-image-container">
+                  <img 
+                    src={categoryImages.breakfast} 
+                    alt="Breakfast"
+                    className="showcase-image"
+                  />
+                  <div className="showcase-overlay"></div>
+                </div>
                 <span>Breakfast</span>
               </Link>
+              
               <Link to="/menu#main-dishes" className="showcase-item main">
-                <FaUtensils className="showcase-icon" />
+                <div className="showcase-image-container">
+                  <img 
+                    src={categoryImages['main-dishes']} 
+                    alt="Main Dishes"
+                    className="showcase-image"
+                  />
+                  <div className="showcase-overlay"></div>
+                </div>
                 <span>Main Dishes</span>
               </Link>
+              
               <Link to="/menu#desserts" className="showcase-item dessert">
-                <FaIceCream className="showcase-icon" />
+                <div className="showcase-image-container">
+                  <img 
+                    src={categoryImages.desserts} 
+                    alt="Desserts"
+                    className="showcase-image"
+                  />
+                  <div className="showcase-overlay"></div>
+                </div>
                 <span>Desserts</span>
               </Link>
             </div>
@@ -270,7 +260,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* NEW: Carousel Section */}
+      {/* Carousel Section */}
       <section className="carousel-section section">
         <div className="container">
           <h2 className="section-title">A Taste of Our Kitchen</h2>
@@ -304,7 +294,6 @@ const HomePage = () => {
               ))}
             </div>
             
-            {/* Carousel Controls */}
             <button className="carousel-btn prev" onClick={prevSlide}>
               <FiChevronLeft className="carousel-icon" />
             </button>
@@ -312,7 +301,6 @@ const HomePage = () => {
               <FiChevronRightIcon className="carousel-icon" />
             </button>
             
-            {/* Carousel Indicators */}
             <div className="carousel-indicators">
               {carouselImages.map((_, index) => (
                 <button
@@ -327,7 +315,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Categories Section */}
+      {/* Categories Section with Images */}
       <section className="categories-section section">
         <div className="container">
           <h2 className="section-title">Our Delicious Categories</h2>
@@ -342,28 +330,33 @@ const HomePage = () => {
                 className="category-card card"
                 style={{ backgroundColor: category.color }}
               >
-                <div className="category-header">
-                  <div className="category-icon">
-                    {category.icon}
-                  </div>
-                  <h3 className="category-title">{category.title}</h3>
+                <div className="category-image-container">
+                  <img 
+                    src={category.image} 
+                    alt={category.title}
+                    className="category-image"
+                  />
+                  <div className="category-overlay"></div>
                 </div>
                 
-                <p className="category-description">{category.description}</p>
-                
-                <ul className="category-items">
-                  {category.items.map((item, idx) => (
-                    <li key={idx} className="category-item">
-                      <FiChevronRight className="item-bullet" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                
-                <Link to="/menu" className="category-link">
-                  <span>View All</span>
-                  <FiChevronRight />
-                </Link>
+                <div className="category-content">
+                  <h3 className="category-title">{category.title}</h3>
+                  <p className="category-description">{category.description}</p>
+                  
+                  <ul className="category-items">
+                    {category.items.map((item, idx) => (
+                      <li key={idx} className="category-item">
+                        <FiChevronRight className="item-bullet" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  <Link to="/menu" className="category-link">
+                    <span>View All</span>
+                    <FiChevronRight />
+                  </Link>
+                </div>
               </div>
             ))}
           </div>
