@@ -358,3 +358,433 @@
   left: 50%;
   transform: translateX(-50%);
 }
+/* Add these styles to your existing MenuPage.css */
+
+/* Sides Section Styles */
+.sides-section {
+  padding: 60px 0;
+  background: linear-gradient(135deg, #fffaf0 0%, #fefce8 100%);
+}
+
+.sides-title {
+  text-align: center;
+  font-size: 2rem;
+  color: var(--dark-chocolate);
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.sides-description {
+  text-align: center;
+  color: var(--text-medium);
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.sides-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.side-item {
+  background: white;
+  border-radius: 12px;
+  padding: 20px 15px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.side-item:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary-red-light);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.side-image-container {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  border: 3px solid var(--primary-red-light);
+  background: white;
+}
+
+.side-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.side-item:hover .side-image {
+  transform: scale(1.1);
+}
+
+.side-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.1), transparent);
+}
+
+.side-name {
+  font-weight: 600;
+  color: var(--dark-chocolate);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.side-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-red);
+  background: var(--light-gray);
+}
+
+/* Responsive Design for Sides Section */
+@media (max-width: 768px) {
+  .sides-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 15px;
+  }
+  
+  .side-item {
+    padding: 15px 10px;
+    gap: 12px;
+  }
+  
+  .side-image-container {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .side-name {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sides-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .sides-title {
+    font-size: 1.8rem;
+  }
+  
+  .sides-description {
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+  
+  .side-item {
+    padding: 15px;
+  }
+  
+  .side-image-container {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* Tablet Landscape */
+@media (min-width: 1024px) {
+  .sides-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* Desktop */
+@media (min-width: 1200px) {
+  .sides-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* Note Section */
+.menu-note {
+  max-width: 800px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, var(--primary-red-light), #fffbeb);
+  border-left: 4px solid var(--primary-red);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.note-icon {
+  font-size: 1.2rem;
+  margin-right: 12px;
+}
+
+.menu-note p {
+  color: var(--dark-chocolate);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  font-size: 1rem;
+}
+
+.menu-note strong {
+  color: var(--primary-red);
+  margin: 0 5px;
+}
+
+@media (max-width: 768px) {
+  .menu-note p {
+    font-size: 0.9rem;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+  
+  .note-icon {
+    margin-right: 0;
+    margin-bottom: 5px;
+  }
+}
+/* Add to your existing MenuPage.css */
+
+/* Sides Section Styles */
+.sides-section {
+  padding: 60px 0;
+  background: linear-gradient(135deg, #fffaf0 0%, #fefce8 100%);
+}
+
+.sides-title {
+  text-align: center;
+  font-size: 2rem;
+  color: var(--dark-chocolate);
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.sides-description {
+  text-align: center;
+  color: var(--text-medium);
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.sides-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.side-item {
+  background: white;
+  border-radius: 12px;
+  padding: 20px 15px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.side-item:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary-red-light);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.side-image-container {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  border: 3px solid var(--primary-red-light);
+  background: white;
+}
+
+.side-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.side-item:hover .side-image {
+  transform: scale(1.1);
+}
+
+.side-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.1), transparent);
+}
+
+.side-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.side-name {
+  font-weight: 600;
+  color: var(--dark-chocolate);
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.side-description {
+  color: var(--text-medium);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  margin: 0;
+  font-style: italic;
+}
+
+.side-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-red);
+  background: var(--light-gray);
+}
+
+/* Responsive Design for Sides Section */
+@media (max-width: 768px) {
+  .sides-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 15px;
+  }
+  
+  .side-item {
+    padding: 15px 10px;
+    gap: 12px;
+  }
+  
+  .side-image-container {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .side-name {
+    font-size: 0.95rem;
+  }
+  
+  .side-description {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sides-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .sides-title {
+    font-size: 1.8rem;
+  }
+  
+  .sides-description {
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+  
+  .side-item {
+    padding: 15px;
+  }
+  
+  .side-image-container {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* Tablet Landscape */
+@media (min-width: 1024px) {
+  .sides-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Desktop */
+@media (min-width: 1200px) {
+  .sides-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* Note Section */
+.menu-note {
+  max-width: 800px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, var(--primary-red-light), #fffbeb);
+  border-left: 4px solid var(--primary-red);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.note-icon {
+  font-size: 1.2rem;
+  margin-right: 12px;
+}
+
+.menu-note p {
+  color: var(--dark-chocolate);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  font-size: 1rem;
+}
+
+.menu-note strong {
+  color: var(--primary-red);
+  margin: 0 5px;
+}
+
+@media (max-width: 768px) {
+  .menu-note p {
+    font-size: 0.9rem;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+  
+  .note-icon {
+    margin-right: 0;
+    margin-bottom: 5px;
+  }
+}

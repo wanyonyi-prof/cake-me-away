@@ -19,6 +19,11 @@ import ugaliImage from '../assets/images/menu/sides/ugali.jpg';
 import pilauImage from '../assets/images/menu/sides/pilau.jpg';
 import beansImage from '../assets/images/menu/sides/beans.jpg';
 import potatoesImage from '../assets/images/menu/sides/potatoes.jpg';
+import greenGramsImage from '../assets/images/menu/sides/greengrams.jpg';
+import vegetableRiceImage from '../assets/images/menu/sides/vegetablerice.jpg';
+import coconutRiceImage from '../assets/images/menu/sides/coconutrice.jpg';
+import pojoyanaziImage from '../assets/images/menu/sides/pojoyanazi.jpg';
+import coconutbeansImage from '../assets/images/menu/sides/coconutbeans.jpg';
 
 const MenuPage = () => {
   const menuData = [
@@ -78,7 +83,7 @@ const MenuPage = () => {
       id: 5,
       image: fishImage,
       title: "Fish Dishes",
-      description: "Fresh fish prepared in various styles",
+      description: "Fresh fish prepared in various coastal styles",
       items: [
         { name: "Wet Fried Fish", description: "Fish cooked in savory sauce" },
         { name: "Fish Kupaka", description: "Fish in coconut cream sauce" },
@@ -128,22 +133,83 @@ const MenuPage = () => {
     }
   ];
 
+  // Side dishes with proper Kenyan coastal descriptions and images
   const sidesData = [
-    { name: "Rice", image: riceImage },
-    { name: "Vegetable Rice", image: riceImage },
-    { name: "Coconut Rice", image: riceImage },
-    { name: "Chapati", image: chapatiImage },
-    { name: "Chips", image: chipsImage },
-    { name: "Baked Potatoes", image: potatoesImage },
-    { name: "Mashed Potatoes", image: potatoesImage },
-    { name: "Ugali", image: ugaliImage },
-    { name: "Pilau", image: pilauImage },
-    { name: "Creamed Pinch", image: riceImage },
-    { name: "Coconut Beans", image: beansImage },
-    { name: "Beans", image: beansImage },
-    { name: "Pojo", image: beansImage },
-    { name: "Pojo ya Nazi", image: beansImage },
-    { name: "Chips Masala", image: chipsImage }
+    { 
+      name: "Rice", 
+      image: riceImage,
+      description: "Plain steamed rice"
+    },
+    { 
+      name: "Vegetable Rice", 
+      image: vegetableRiceImage,
+      description: "Rice cooked with mixed vegetables"
+    },
+    { 
+      name: "Coconut Rice", 
+      image: coconutRiceImage,
+      description: "Rice cooked in coconut milk"
+    },
+    { 
+      name: "Chapati", 
+      image: chapatiImage,
+      description: "Soft, flaky flatbread"
+    },
+    { 
+      name: "Chips", 
+      image: chipsImage,
+      description: "Crispy fried potatoes"
+    },
+    { 
+      name: "Baked Potatoes", 
+      image: 'https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+      description: "Potatoes baked to perfection"
+    },
+    { 
+      name: "Mashed Potatoes", 
+      image: potatoesImage,
+      description: "Creamy mashed potatoes"
+    },
+    { 
+      name: "Ugali", 
+      image: ugaliImage,
+      description: "Traditional maize meal"
+    },
+    { 
+      name: "Pilau", 
+      image: pilauImage,
+      description: "Spiced rice with meat or vegetables"
+    },
+    { 
+      name: "Creamed Pinch", 
+      image: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+      description: "Creamy vegetable side dish"
+    },
+    { 
+      name: "Coconut Beans", 
+      image: coconutbeansImage,
+      description: "Beans cooked in coconut cream"
+    },
+    { 
+      name: "Beans", 
+      image: beansImage,
+      description: "Stewed beans"
+    },
+    { 
+      name: "Pojo", 
+      image: greenGramsImage,
+      description: "Green grams stew"
+    },
+    { 
+      name: "Pojo ya Nazi", 
+      image: pojoyanaziImage,
+      description: "Green grams cooked in coconut cream"
+    },
+    { 
+      name: "Chips Masala", 
+      image: chipsImage,
+      description: "Chips with spicy masala seasoning"
+    }
   ];
 
   return (
@@ -225,6 +291,9 @@ const MenuPage = () => {
       <section className="sides-section section-sm">
         <div className="container">
           <h2 className="sides-title">Side Dishes & Accompaniments</h2>
+          <p className="sides-description">
+            Traditional Kenyan coastal sides to complement your meal
+          </p>
           <div className="sides-grid">
             {sidesData.map((side, index) => (
               <div key={index} className="side-item">
@@ -238,8 +307,12 @@ const MenuPage = () => {
                       e.target.parentElement.innerHTML = `<div class="side-fallback">${side.name.charAt(0)}</div>`;
                     }}
                   />
+                  <div className="side-overlay"></div>
                 </div>
-                <span className="side-name">{side.name}</span>
+                <div className="side-content">
+                  <span className="side-name">{side.name}</span>
+                  <p className="side-description">{side.description}</p>
+                </div>
               </div>
             ))}
           </div>
