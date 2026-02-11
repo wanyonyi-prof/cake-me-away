@@ -1,25 +1,39 @@
 import React from 'react';
 import './AboutPage.css';
 
+// IMPORT YOUR LOCAL IMAGES
+import valueFreshIngredients from '../assets/images/about/fresh-ingredients.jpg';
+import valueMadeToOrder from '../assets/images/about/made-to-order.jpg';
+import valuePassion from '../assets/images/about/passion.jpg';
+import valueCommunity from '../assets/images/about/community.jpg';
+import restaurantImage from '../assets/images/about/restaurant-kwale.jpg';
+import teamImage from '../assets/images/about/team.jpg';
+
+// IMPORT CONFERENCE/RESERVATION IMAGES (you have 4 images)
+import conference1 from '../assets/images/conference/conference-1.jpg';
+import conference2 from '../assets/images/conference/conference-2.jpg';
+import conference3 from '../assets/images/conference/conference-3.jpg';
+import conference4 from '../assets/images/conference/conference-4.jpg';
+
 const AboutPage = () => {
   const values = [
     {
-      image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+      image: valueFreshIngredients,
       title: "Fresh Ingredients",
       description: "We source the freshest local ingredients for every dish"
     },
     {
-      image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+      image: valueMadeToOrder,
       title: "Made to Order",
       description: "Every meal is prepared fresh when you order it"
     },
     {
-      image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+      image: valuePassion,
       title: "Passion for Food",
       description: "We cook with love and attention to detail"
     },
     {
-      image: 'https://images.unsplash.com/photo-1556911073-38141963c9e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+      image: valueCommunity,
       title: "Community Focused",
       description: "Serving the Kwale community with pride since inception"
     }
@@ -46,6 +60,14 @@ const AboutPage = () => {
       title: "You Enjoy",
       description: "Experience the difference of truly fresh dining"
     }
+  ];
+
+  // Conference images array
+  const conferenceImages = [
+    { id: 1, image: conference1, title: "Conference Hall", description: "Spacious conference area for meetings" },
+    { id: 2, image: conference2, title: "Business Meeting", description: "Professional setup for corporate events" },
+    { id: 3, image: conference3, title: "Private Dining", description: "Exclusive space for special occasions" },
+    { id: 4, image: conference4, title: "Workshop Space", description: "Ideal for seminars and training" }
   ];
 
   return (
@@ -99,7 +121,7 @@ const AboutPage = () => {
             <div className="story-image">
               <div className="image-container">
                 <img 
-                  src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                  src={restaurantImage} 
                   alt="Cake Me Away Restaurant in Kwale"
                   className="restaurant-image"
                 />
@@ -142,6 +164,55 @@ const AboutPage = () => {
         </div>
       </section>
 
+      {/* NEW: Conference & Reservations Section */}
+      <section className="conference-section">
+        <div className="container">
+          <div className="section-header">
+            <h2 className="conference-title">Book Our Conference & Event Space</h2>
+            <p className="conference-subtitle">
+              Perfect for business meetings, workshops, private dinners, and special occasions
+            </p>
+          </div>
+
+          <div className="conference-grid">
+            {conferenceImages.map((item) => (
+              <div key={item.id} className="conference-card">
+                <div className="conference-image-container">
+                  <img 
+                    src={item.image} 
+                    alt={item.title}
+                    className="conference-image"
+                  />
+                  <div className="conference-overlay"></div>
+                </div>
+                <div className="conference-content">
+                  <h3 className="conference-card-title">{item.title}</h3>
+                  <p className="conference-description">{item.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="conference-cta">
+            <div className="cta-content">
+              <h3 className="cta-heading">Ready to book your event?</h3>
+              <p className="cta-text">
+                Contact us today to reserve our conference space. We offer flexible packages 
+                with catering options tailored to your needs.
+              </p>
+              <div className="cta-buttons">
+                <a href="tel:+254743184519" className="btn btn-primary">
+                  Call to Book
+                </a>
+                <a href="/contact" className="btn btn-outline">
+                  Send Inquiry
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Process Section */}
       <section className="process-section">
         <div className="container">
@@ -170,7 +241,7 @@ const AboutPage = () => {
           <div className="team-card">
             <div className="team-image-container">
               <img 
-                src="https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                src={teamImage} 
                 alt="Cake Me Away Team"
                 className="team-image"
               />
